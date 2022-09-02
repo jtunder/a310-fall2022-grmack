@@ -1,90 +1,121 @@
 import math
 
+############################### Point Class #############################
+
+
 class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
     def __str__(self):
-        return(f"({self.x}, {self.y})")
-    def distanceTo(self, otherPoint):
-        dx = self.x - otherPoint.x
-        dy = self.y - otherPoint.y
-        return math.sqrt(dx **2 + dy **2)
+        return f"({self.x}, {self.y})"
 
-a = Point(1, 2)
-b = Point(3, 5)
-
-print(f"A:{a}")
-print(f"B:{b}")
-
-## Line
-class Line:
-    def __init__(self, point1, point2):
-        self.point1 = point1
-        self.point2 = point2
-    def length(self):
-        self.point1.distanceTo(self.point2)
+    def distanceTo(self, other):
+        distance = math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
+        return distance
 
 
-## Triangle
-class Triangle:
-    def __init__(self, p1, p2, p3):
+print("---------------------------Class Point---------------------------")
+a = Point(3, 2)
+b = Point(-1, 5)
+print(f"I have two point objects: {a} and {b}")
+
+howFar = a.distanceTo(b)
+print("Distance from {a} to {b} is {howFar}")
+
+############################### Line Class #############################
+
+
+class Line(Point):
+    def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
-        self.p3 = p3
+
+    def __str__(self):
+        return f"({self.p1}, {self.p2})"
+
+    def length(self):
+        return self.p2.distanceTo(self.p1)
+
+
+print("---------------------------Class Line---------------------------")
+a = Point(3, 2)
+b = Point(-1, 7)
+c = Line(a, b)
+distance = c.length()
+print("Length of line {c} is {distance}")
+
+############################### Triangle Class #############################
+
+
+class Triangle(Line):
+    def __init__(self, p1, p2, p3):
+        self.l1 = Line(p1, p2)
+        self.l2 = Line(p2, p3)
+        self.l3 = Line(p3, p1)
+
+    def __str__(self):
+        return "Triangle {" + str(self.l1.p1) + ", " + str(self.l2.p1) + ", " + str(self.l3.p1) + "}"
+
     def area(self):
-        a = self.p1.distanceTo(self.p2)
-        b = self.p2.distanceTo(self.p3)
-        c = self.p3.distanceTo(self.p1)
-        s = (a + b + c) /2
-        area = math.sqrt(s * (s-a) * (s-b) * (s-c))
-        return area
+        x = (self.l1.length() + self.l2.length() + self.l3.length())/2
+        a = math.sqrt(x*(x - self.l1.length()) *
+                      (x - self.l2.length())*(x - self.l3.length()))
+        return a
 
 
-c = Point(7, 10)
-print(c)
+print("---------------------------Class Triangle---------------------------")
+a = Point(4, 5)
+b = Point(2, 2)
+c = Point(5, 1)
+tri = Triangle(a, b, c)
+A = tri.area()
+print(f"Area of {tri} is {A}")
 
-myTriangle = Triangle(a, b, c)
+############################### Sequence Class #############################
 
-print(myTriangle.area())
 
 class Sequence:
     def __init__(self, value, rest):
         self.value = value
         self.rest = rest
+
     def __str__(self):
         return (f"({self.value}, {self.rest})")
 
-ab = Sequence(1, None)
-ac = Sequence(2, ab)
-ad = Sequence(3, ac)
 
-print(ad)
+print("---------------------------Class Sequence---------------------------")
+a = Sequence("Bob", None)
+a = Sequence("Gru", a)
+print(a)
 
-# (3, (2, (1, None)))
+############################### BinaryTree Class #############################
 
 
-## Binary Tree
 class BinaryTree:
-    def __init__(self, value, leftChild, rightChild):
-        self.value = value
-        self.leftChild = leftChild
-        self.rightChild = rightChild
-    def __str__(self):
-        out = ""
-        if self.leftChild:
-            out += str(self.leftChild) + " "
-        
-        out += str(self.value) + " "
+    def __init__(self, value, left, right):
+        (self.value, self.left, self.right) = (value, left, right)
 
-        if self.rightChild:
-            out += str(self.rightChild) + " "
-        return out
+    def show(self):
+        if self.left == None:
+            left = " . "
+        else:
+            left = self.left.show()
+        if self.right == None:
+            right = " . "
+        else:
+            right = self.right.show()
+
+        return f"({left} {self.value} {right})"
 
 
+print("---------------------------Class BinaryTree---------------------------")
+a = BinaryTree(5, None, None)
+print(a.show())
 
-lc = BinaryTree(5, None, None)
-rc = BinaryTree(10, None, None)
-myBinaryTree = BinaryTree(7, lc, rc)
+a = BinaryTree(1, a, None)
+print(a.show())
 
-print(myBinaryTree)
+a = BinaryTree(2, BinaryTree(4, None, a), None)
+print(a.show())
