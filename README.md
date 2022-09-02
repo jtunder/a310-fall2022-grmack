@@ -1,3 +1,4 @@
-# a310-fall2022-grmack
+# A310 Gabe Mack (10:20AM Lab)
 ## Labs
-[August 26](https://github.com/c212/a310-fall2022-grmack/tree/main/0826)
+1. [August 26](https://github.com/c212/a310-fall2022-grmack/tree/main/0826)
+2. [September 2](https://github.com/c212/a310-fall2022-grmack/tree/main/0902)
