@@ -27,6 +27,8 @@ def main():
             color = commandList[1].strip()
             t.fillcolor(color)
             t.begin_fill()
+        elif command == "background":
+            turtle.Screen().bgcolor(commandList[1].strip())
         elif command == "endfill":
             t.end_fill()
 
