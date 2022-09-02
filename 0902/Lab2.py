@@ -23,7 +23,7 @@ class Line:
         self.point1 = point1
         self.point2 = point2
     def length(self):
-        self.point1.distanceTo(point2)
+        self.point1.distanceTo(self.point2)
 
 
 ## Triangle
