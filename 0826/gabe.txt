@@ -1,6 +1,7 @@
+background, blue
 pendown
 goto, 0, 0, 400, #000
-goto, 0, 0, 388, #34c6eb
+goto, 0, 0, 388, #f5f242
 penup
 goto, 70, 100, 40, #000
 pendown
