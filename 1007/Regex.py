@@ -1,3 +1,7 @@
+#
+# This isn't complete, but everything you need to check for the third case (first character is vowel) is available below:
+# 
+
 import re 
 
 one = re.compile("(\d)(\d)", re.VERBOSE)
